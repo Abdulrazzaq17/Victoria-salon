@@ -1,0 +1,449 @@
+<!DOCTYPE html>
+<html lang="ru" class="scroll-smooth">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Victoria | Салон красоты Казань</title>
+    
+    <!-- Fonts -->
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;600;800&family=Playfair+Display:ital,wght@0,400;0,700;1,400&display=swap" rel="stylesheet">
+    
+    <!-- Tailwind CSS CDN -->
+    <script src="https://cdn.tailwindcss.com"></script>
+    <script>
+        tailwind.config = {
+            theme: {
+                extend: {
+                    colors: {
+                        mv: {
+                            cream: '#FDFBF7',
+                            gold: '#C5A059',
+                            taupe: '#4A4440',
+                            blush: '#F5E6E0',
+                            dark: '#1A1A1A',
+                        }
+                    },
+                    fontFamily: {
+                        sans: ['Inter', 'sans-serif'],
+                        serif: ['Playfair Display', 'serif'],
+                    }
+                }
+            }
+        }
+    </script>
+    
+    <!-- Lucide Icons CDN -->
+    <script src="https://unpkg.com/lucide@latest"></script>
+
+    <style>
+        body { background-color: #FDFBF7; color: #4A4440; overflow-x: hidden; font-family: 'Inter', sans-serif; }
+        .font-serif { font-family: 'Playfair Display', serif; }
+        .glass { background: rgba(255, 255, 255, 0.85); backdrop-filter: blur(12px); }
+        
+        /* Scrollbar */
+        ::-webkit-scrollbar { width: 6px; }
+        ::-webkit-scrollbar-track { background: #FDFBF7; }
+        ::-webkit-scrollbar-thumb { background: #C5A059; border-radius: 10px; }
+        
+        /* Animations */
+        @keyframes fadeIn { from { opacity: 0; transform: translateY(20px); } to { opacity: 1; transform: translateY(0); } }
+        .animate-fade-in { animation: fadeIn 1.2s ease-out forwards; }
+        
+        .gallery-item:hover img { transform: scale(1.05); }
+        .gallery-item img { transition: all 0.8s cubic-bezier(0.4, 0, 0.2, 1); }
+        
+        .service-card img { transition: all 1s cubic-bezier(0.4, 0, 0.2, 1); }
+
+        /* Floating Button */
+        .floating-map-btn {
+            position: fixed;
+            bottom: 2rem;
+            right: 2rem;
+            z-index: 100;
+            background: #C5A059;
+            color: white;
+            width: 60px;
+            height: 60px;
+            border-radius: 50%;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            box-shadow: 0 10px 25px rgba(197, 160, 89, 0.4);
+            transition: all 0.3s ease;
+            cursor: pointer;
+        }
+        
+        @media (max-width: 640px) {
+            .floating-map-btn { width: 50px; height: 50px; bottom: 1.5rem; right: 1.5rem; }
+        }
+    </style>
+</head>
+<body>
+
+    <!-- FLOATING MAP BUTTON -->
+    <a href="https://yandex.com/maps/org/victoria/8535512477?si=5h7ceq8mhrgkd7b86t4jtuhd5w" target="_blank" class="floating-map-btn">
+        <i data-lucide="map-pin"></i>
+    </a>
+
+    <!-- NAVIGATION -->
+    <nav id="navbar" class="fixed w-full z-50 transition-all duration-300 py-6">
+        <div class="max-w-7xl mx-auto px-6 flex justify-between items-center">
+            <a href="#" class="text-2xl font-serif tracking-[0.2em] text-mv-taupe uppercase">Victoria</a>
+            <div class="hidden md:flex space-x-10 items-center">
+                <a href="#services" class="text-[10px] uppercase tracking-[0.2em] hover:text-mv-gold transition font-bold">Услуги</a>
+                <a href="#about" class="text-[10px] uppercase tracking-[0.2em] hover:text-mv-gold transition font-bold">О нас</a>
+                <a href="#interior" class="text-[10px] uppercase tracking-[0.2em] hover:text-mv-gold transition font-bold">Интерьер</a>
+                <a href="#contact" class="text-[10px] uppercase tracking-[0.2em] hover:text-mv-gold transition font-bold">Контакты</a>
+                <a href="#booking" class="bg-mv-dark text-white px-8 py-3 text-[10px] uppercase tracking-[0.2em] hover:bg-mv-gold transition duration-500 rounded-sm shadow-xl font-bold">Запись</a>
+            </div>
+            <button class="md:hidden" onclick="toggleMenu(true)">
+                <i data-lucide="menu" class="w-6 h-6 text-mv-taupe"></i>
+            </button>
+        </div>
+    </nav>
+
+    <!-- MOBILE MENU -->
+    <div id="mobile-menu" class="fixed inset-0 bg-mv-cream z-[60] flex flex-col items-center justify-center space-y-10 transition-all duration-500 translate-y-full">
+        <button class="absolute top-8 right-8" onclick="toggleMenu(false)">
+            <i data-lucide="x" class="w-8 h-8 text-mv-taupe"></i>
+        </button>
+        <a href="#services" onclick="toggleMenu(false)" class="text-3xl font-serif text-mv-taupe uppercase">Услуги</a>
+        <a href="#about" onclick="toggleMenu(false)" class="text-3xl font-serif text-mv-taupe uppercase">О нас</a>
+        <a href="#interior" onclick="toggleMenu(false)" class="text-3xl font-serif text-mv-taupe uppercase">Интерьер</a>
+        <a href="#contact" onclick="toggleMenu(false)" class="text-3xl font-serif text-mv-taupe uppercase">Контакты</a>
+        <a href="#booking" onclick="toggleMenu(false)" class="text-3xl font-serif text-mv-gold uppercase">Запись</a>
+    </div>
+
+    <!-- HERO -->
+    <section class="relative h-screen flex items-center justify-center text-center px-6 overflow-hidden">
+        <div class="absolute inset-0 z-0">
+      <img src="https://i.ibb.co/MyvKt0L5/Hero-1.jpg" class="w-full h-full object-cover brightness-[0.4]" alt="Victoria Salon Interior">
+        </div>
+        <div class="relative z-10 text-white animate-fade-in w-full max-w-4xl px-4">
+            <div class="flex justify-center mb-6 text-mv-gold">
+                <i data-lucide="sparkles" class="w-5 h-5"></i>
+                <span class="ml-4 text-[10px] uppercase tracking-[0.4em] text-white self-center font-bold">Beauty Salon Kazan</span>
+            </div>
+            <h1 class="text-6xl md:text-[9rem] font-serif mb-8 leading-none tracking-tight">Victoria</h1>
+            <p class="text-[11px] md:text-[13px] uppercase tracking-[0.3em] mb-12 opacity-90 max-w-2xl mx-auto leading-relaxed">
+                Victoria, г. Казань, Советский р-н, ул. Пионерская, 9А
+            </p>
+            <div class="flex flex-col sm:flex-row gap-4 justify-center">
+                <a href="#booking" class="w-full sm:w-auto bg-mv-gold text-white px-12 py-5 text-[11px] uppercase tracking-[0.3em] hover:bg-white hover:text-mv-dark transition-all duration-500 rounded-sm font-bold shadow-2xl">Записаться</a>
+                <a href="#services" class="w-full sm:w-auto border border-white/50 backdrop-blur-md text-white px-12 py-5 text-[11px] uppercase tracking-[0.3em] hover:bg-white hover:text-mv-dark transition-all duration-500 rounded-sm font-bold">Наши услуги</a>
+            </div>
+        </div>
+    </section>
+
+    <!-- SERVICES SECTION -->
+    <section id="services" class="py-24 bg-mv-cream px-6">
+        <div class="max-w-7xl mx-auto">
+            <div class="text-center mb-20">
+                <span class="text-mv-gold text-[10px] uppercase tracking-[0.4em] font-bold block mb-4">Наши услуги</span>
+                <h2 class="text-4xl md:text-5xl font-serif text-mv-taupe mb-6">Beauty & Aesthetics</h2>
+                <div class="w-20 h-1 bg-mv-gold mx-auto"></div>
+            </div>
+
+            <div class="grid grid-cols-1 lg:grid-cols-2 gap-16">
+                <!-- Men -->
+                <div class="bg-white p-6 rounded-3xl shadow-sm border border-mv-blush overflow-hidden flex flex-col md:flex-row gap-8">
+                    <div class="md:w-1/2 aspect-[4/5] overflow-hidden rounded-2xl shadow-md">
+                        <img src="https://i.ibb.co/Cpp3Gj4q/decf180dbb3c46348d621d3b7ecb25f3.jpg" class="w-full h-full object-cover hover:scale-105 transition-transform duration-700">
+                    </div>
+                    <div class="md:w-1/2 flex flex-col justify-center">
+                        <h3 class="text-2xl font-serif mb-6 border-b border-mv-blush pb-4">Мужской зал</h3>
+                        <ul class="space-y-4 text-sm font-medium tracking-wide">
+                            <li class="flex items-center gap-3"><i data-lucide="check" class="w-4 h-4 text-mv-gold"></i> Стрижка модельная</li>
+                            <li class="flex items-center gap-3"><i data-lucide="check" class="w-4 h-4 text-mv-gold"></i> Стрижка спортивная</li>
+                            <li class="flex items-center gap-3"><i data-lucide="check" class="w-4 h-4 text-mv-gold"></i> Стрижка креативная</li>
+                            <li class="flex items-center gap-3"><i data-lucide="check" class="w-4 h-4 text-mv-gold"></i> Химическая завивка</li>
+                            <li class="flex items-center gap-3"><i data-lucide="check" class="w-4 h-4 text-mv-gold"></i> Тонировка седины</li>
+                        </ul>
+                    </div>
+                </div>
+
+                <!-- Special Care -->
+                <div class="bg-white p-6 rounded-3xl shadow-sm border border-mv-blush overflow-hidden flex flex-col md:flex-row gap-8">
+                    <div class="md:w-1/2 flex flex-col justify-center order-2 md:order-1">
+                        <h3 class="text-2xl font-serif mb-6 border-b border-mv-blush pb-4">Специальный уход</h3>
+                        <ul class="space-y-4 text-sm font-medium tracking-wide">
+                            <li class="flex items-center gap-3"><i data-lucide="check" class="w-4 h-4 text-mv-gold"></i> Полировка волос</li>
+                            <li class="flex items-center gap-3"><i data-lucide="check" class="w-4 h-4 text-mv-gold"></i> Интенсивное восстановление</li>
+                            <li class="flex items-center gap-3"><i data-lucide="check" class="w-4 h-4 text-mv-gold"></i> Профессиональный уход</li>
+                        </ul>
+                    </div>
+                    <div class="md:w-1/2 aspect-[4/5] overflow-hidden rounded-2xl shadow-md order-1 md:order-2">
+                        <img src="https://i.ibb.co/0yr3vWWF/woman-washing-head-hairsalon-0456c1c4-24c2-4fdf-b27e-7f59f28de02e-600x600.jpg" class="w-full h-full object-cover hover:scale-105 transition-transform duration-700">
+                    </div>
+                </div>
+            </div>
+
+            <!-- Women Section -->
+<div class="mt-16 bg-white p-8 rounded-3xl shadow-sm border border-mv-blush">
+    <div class="max-w-3xl mx-auto mb-10 overflow-hidden rounded-2xl shadow-xl">
+        <img src="https://i.ibb.co/wrK4cGn3/Dxf-Uz-KE-I33skr-PWmq-A8-XZZo-OQhf1tex-Xd-HLGTUS-SE6c-Gs-Ju6q-Jpx6pte-Xu3-PBF-at-PFNqp-Fk-J6-Cl-FQC1qh.jpg" 
+             class="w-full h-auto object-contain md:object-cover"
+             style="aspect-ratio: 16/9; max-height: 400px;"
+             alt="Женский зал Victoria">
+    </div>
+    <div class="max-w-2xl mx-auto text-center">
+        <h3 class="text-3xl font-serif mb-6">Женский зал</h3>
+        <div class="grid grid-cols-2 gap-4 text-sm font-medium tracking-wide">
+            <p>Стрижка волос любой сложности</p>
+            <p>Стильные укладки</p>
+            <p>Профессиональное окрашивание</p>
+            <p>Вечерние прически</p>
+        </div>
+    </div>
+</div>
+        </div>
+    </section>
+
+    <!-- ABOUT SECTION -->
+<section id="about" class="py-24 bg-white px-6">
+    <div class="max-w-7xl mx-auto grid md:grid-cols-2 gap-16 items-center">
+        <div class="relative order-2 md:order-1">
+            <div class="rounded-2xl shadow-2xl w-full overflow-hidden bg-black relative" style="height: 500px;">
+                <!-- Cover overlay with play button -->
+                <div id="videoCover" 
+                     class="absolute inset-0 bg-cover bg-center cursor-pointer z-10"
+                     style="background-image: url('https://i.ibb.co/p6Q6s42C/qbj6-Lrba-OJg-D-c-C-ZQUBt7-Xkwo-VC7-RY5-Qwr-st9i-Fc-BS4-VR6m-TFTk-B0-PZx-Yiym-QBw-O-y-Kueb-C1-H16-Vz-c-HPkgb.jpg'); display: flex; align-items: center; justify-content: center; background-size: cover; background-position: center;"
+                     onclick="playVideo()">
+                    <div class="bg-black/60 w-20 h-20 rounded-full flex items-center justify-center hover:bg-black/80 transition-all duration-300 hover:scale-110">
+                        <svg class="w-10 h-10 text-white ml-1" fill="currentColor" viewBox="0 0 24 24">
+                            <path d="M8 5v14l11-7z"/>
+                        </svg>
+                    </div>
+                </div>
+                <!-- Clean Video -->
+                <video 
+                    id="salonVideo"
+                    class="w-full h-full object-cover hidden"
+                    playsinline
+                    controls
+                    style="object-fit: cover;">
+                    <source src="https://res.cloudinary.com/dcpfqdujx/video/upload/q_auto,f_auto/v1774689057/13112997797830_fdjb46.mp4" type="video/mp4">
+                </video>
+            </div>
+        </div>
+
+        <div class="order-1 md:order-2">
+            <span class="text-mv-gold text-[10px] uppercase tracking-[0.4em] font-bold block mb-4">Философия Victoria</span>
+            <h2 class="text-4xl md:text-5xl font-serif text-mv-taupe mb-8 leading-tight">Ваша красота — наше вдохновение</h2>
+            <p class="text-mv-taupe opacity-70 mb-10 text-lg leading-relaxed">Салон красоты Victoria в Казани (ул. Пионерская, 9А) предлагает полный спектр услуг: <b>парикмахерские услуги, ногтевой сервис, наращивание ресниц, оформление бровей, депиляция</b>. Мы объединяем уютную атмосферу и высокое мастерство.</p>
+            <div class="grid grid-cols-1 sm:grid-cols-2 gap-6 text-[10px] uppercase tracking-widest font-black">
+                <div class="flex items-center gap-3"><i data-lucide="check-circle" class="text-mv-gold w-5 h-5"></i> Опытные мастера</div>
+                <div class="flex items-center gap-3"><i data-lucide="check-circle" class="text-mv-gold w-5 h-5"></i> Премиум составы</div>
+                <div class="flex items-center gap-3"><i data-lucide="check-circle" class="text-mv-gold w-5 h-5"></i> Стерильный инструмент</div>
+                <div class="flex items-center gap-3"><i data-lucide="check-circle" class="text-mv-gold w-5 h-5"></i> Уютная атмосфера</div>
+            </div>
+        </div>
+    </div>
+</section>
+
+<script>
+function playVideo() {
+    const cover = document.getElementById('videoCover');
+    const video = document.getElementById('salonVideo');
+    
+    cover.style.display = 'none';
+    video.classList.remove('hidden');
+    video.play();
+}
+</script>
+
+    <!-- INTERIOR SECTION -->
+    <section id="interior" class="py-24 bg-mv-cream px-6">
+        <div class="max-w-7xl mx-auto text-center">
+            <span class="text-mv-gold text-[10px] uppercase tracking-[0.4em] font-bold block mb-4">Пространство</span>
+            <h2 class="text-4xl md:text-5xl font-serif text-mv-taupe mb-12">Интерьер</h2>
+            
+            <div class="grid grid-cols-1 md:grid-cols-3 gap-6 max-w-6xl mx-auto">
+                <div class="rounded-2xl overflow-hidden shadow-lg aspect-[4/5] border-4 border-white">
+                    <img src="https://i.ibb.co/TBX10Qb0/XL-20.jpg" class="w-full h-full object-cover hover:scale-105 transition-transform duration-700">
+                </div>
+                <div class="rounded-2xl overflow-hidden shadow-lg aspect-[4/5] border-4 border-white">
+                    <img src="https://i.ibb.co/7dRsBDpg/XL-19.jpg" class="w-full h-full object-cover hover:scale-105 transition-transform duration-700">
+                </div>
+                <div class="rounded-2xl overflow-hidden shadow-lg aspect-[4/5] border-4 border-white">
+                    <img src="https://i.ibb.co/7JR7H5qT/XL-18.jpg" class="w-full h-full object-cover hover:scale-105 transition-transform duration-700">
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- CONTACT SECTION -->
+    <section id="contact" class="py-24 bg-white px-6">
+        <div class="max-w-7xl mx-auto grid md:grid-cols-2 gap-16 items-center">
+            <div class="space-y-8">
+                <h2 class="text-4xl font-serif text-mv-taupe">Ждем вас в гости</h2>
+                <div class="space-y-6">
+                    <div class="flex items-start gap-5">
+                        <div class="w-12 h-12 bg-mv-gold/10 flex items-center justify-center rounded-2xl shrink-0">
+                            <i data-lucide="map-pin" class="text-mv-gold w-6 h-6"></i>
+                        </div>
+                        <div>
+                            <p class="font-bold text-mv-taupe text-lg">Victoria</p>
+                            <p class="text-mv-taupe/80">г. Казань, Советский р-н, ул. Пионерская, 9А</p>
+                        </div>
+                    </div>
+                    <div class="flex items-start gap-5">
+                        <div class="w-12 h-12 bg-mv-gold/10 flex items-center justify-center rounded-2xl shrink-0">
+                            <i data-lucide="phone" class="text-mv-gold w-6 h-6"></i>
+                        </div>
+                        <div>
+                            <p class="font-bold text-mv-taupe text-lg">+7 965 601-25-83</p>
+                            <p class="text-mv-taupe/60 text-sm">Ежедневно с 09:00 до 20:00</p>
+                        </div>
+                    </div>
+                </div>
+                
+                <div class="pt-6 grid grid-cols-1 sm:grid-cols-2 gap-4">
+    <a href="https://yandex.com/maps/org/victoria/8535512477?si=5h7ceq8mhrgkd7b86t4jtuhd5w" target="_blank" 
+       class="inline-flex items-center justify-center gap-3 bg-red-600 text-white px-8 py-5 text-xs uppercase tracking-widest hover:bg-red-700 transition rounded-xl shadow-lg font-bold">
+        <i data-lucide="map"></i> Открыть в Яндекс Картах
+    </a>
+    <a href="https://vk.ru/club169287802" target="_blank" 
+       class="inline-flex items-center justify-center gap-3 bg-[#0077FF] text-white px-8 py-5 text-xs uppercase tracking-widest hover:bg-blue-700 transition rounded-xl shadow-lg font-bold">
+        <i data-lucide="share-2"></i> Сообщество VK
+    </a>
+    <a href="https://dikidi.ru/176693" target="_blank" 
+       class="inline-flex items-center justify-center gap-3 bg-[#24A1DE] text-white px-8 py-5 text-xs uppercase tracking-widest hover:bg-[#1a7aa8] transition rounded-xl shadow-lg font-bold">
+        <i data-lucide="calendar-check"></i> Онлайн-запись Dikidi
+    </a>
+    <a href="https://max.ru/u/f9LHodD0cOK-700vbPMrsf0" target="_blank" 
+       class="inline-flex items-center justify-center gap-3 bg-mv-dark text-white px-8 py-5 text-xs uppercase tracking-widest hover:bg-mv-gold transition rounded-xl shadow-lg font-bold sm:col-span-2">
+        <i data-lucide="external-link"></i> Мы на MAX.ru
+    </a>
+</div>
+            </div>
+            
+            <div class="relative">
+    <div class="rounded-3xl overflow-hidden shadow-2xl border-4 border-white">
+        <img src="https://i.ibb.co/2YkjbQ94/s-GFPf-Jq-kw-DAt-Cy-Kpb-Qg492-Vip-HW2g-MQT-og7g0dc-ILMDZIKY8-ZMUIRbwsh9tlzqyu7c-HEbb-YJZ9wdsk-G50kg-OX.jpg" class="w-full h-full object-cover" alt="Salon Location View">
+    </div>
+</div>
+</div>
+        </div>
+    </section>
+
+    <!-- BOOKING SECTION -->
+    <section id="booking" class="py-24 bg-mv-cream px-6">
+        <div class="max-w-5xl mx-auto bg-white shadow-2xl rounded-[3rem] overflow-hidden flex flex-col md:flex-row border border-mv-blush">
+            <div class="md:w-1/2 p-10 md:p-16 bg-mv-dark text-white flex flex-col justify-center">
+                <h2 class="text-4xl font-serif mb-6">Онлайн Запись</h2>
+                <p class="text-sm opacity-60 mb-10 leading-relaxed uppercase tracking-widest font-medium">Оставьте данные, и мы свяжемся с вами в Telegram для подтверждения визита.</p>
+                <div class="space-y-6 text-[11px] uppercase tracking-widest font-bold text-mv-gold">
+                    <div class="flex items-center gap-4"><i data-lucide="phone" class="w-5 h-5 text-white"></i> +7 965 601-25-83</div>
+                    <div class="flex items-center gap-4"><i data-lucide="send" class="w-5 h-5 text-white"></i> @viktoria_beauty_salon</div>
+                </div>
+            </div>
+            <div class="md:w-1/2 p-10 md:p-16 space-y-8 bg-white">
+                <div class="space-y-1">
+                    <label class="text-[9px] uppercase tracking-widest opacity-40 font-black">Ваше Имя</label>
+                    <input id="form-name" type="text" placeholder="Мария" class="w-full border-b py-4 outline-none focus:border-mv-gold bg-transparent transition-all font-serif text-xl">
+                </div>
+                <div class="space-y-1">
+                    <label class="text-[9px] uppercase tracking-widest opacity-40 font-black">Телефон</label>
+                    <input id="form-phone" type="tel" placeholder="+7 (___) ___-__-__" class="w-full border-b py-4 outline-none focus:border-mv-gold bg-transparent transition-all font-serif text-xl">
+                </div>
+                <div class="space-y-1">
+                    <label class="text-[9px] uppercase tracking-widest opacity-40 font-black">Услуга</label>
+                    <select id="form-service" class="w-full border-b py-4 outline-none focus:border-mv-gold bg-transparent transition-all font-serif text-xl cursor-pointer">
+                        <option>Парикмахерские услуги</option>
+                        <option>Ногтевой сервис</option>
+                        <option>Наращивание ресниц</option>
+                        <option>Оформление бровей</option>
+                        <option>Депиляция</option>
+                    </select>
+                </div>
+                <div class="pt-6">
+                    <button onclick="submitBooking()" class="w-full bg-[#24A1DE] text-white py-5 rounded-2xl flex justify-center items-center gap-3 hover:bg-sky-600 transition-all uppercase text-[11px] tracking-widest font-black shadow-lg">
+                        <i data-lucide="send" class="w-4 h-4"></i>
+                        Записаться через Telegram
+                    </button>
+                    <p class="text-center text-[9px] opacity-40 mt-4 uppercase tracking-widest">Обработка данных по стандарту конфиденциальности</p>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- FOOTER -->
+    <footer class="bg-white py-20 px-6 border-t border-mv-blush">
+        <div class="max-w-7xl mx-auto flex flex-col md:flex-row justify-between items-center gap-12">
+            <div class="text-center md:text-left">
+                <h2 class="text-3xl font-serif tracking-widest mb-4 text-mv-taupe uppercase">Victoria</h2>
+                <p class="text-[10px] uppercase opacity-40 tracking-widest font-black">© 2025 Victoria Beauty Salon • Kazan</p>
+            </div>
+            
+            <div class="flex gap-6">
+                <a href="https://t.me/viktoria_beauty_salon" target="_blank" class="w-12 h-12 bg-mv-cream rounded-full flex items-center justify-center shadow-sm text-mv-taupe hover:text-[#24A1DE] transition-all"><i data-lucide="send"></i></a>
+                <a href="https://vk.ru/club169287802" target="_blank" class="w-12 h-12 bg-mv-cream rounded-full flex items-center justify-center shadow-sm text-mv-taupe hover:text-[#0077FF] transition-all"><i data-lucide="share-2"></i></a>
+                <a href="https://max.ru/u/f9LHodD0cOK-700vbPMrsf0" target="_blank" class="w-12 h-12 bg-mv-cream rounded-full flex items-center justify-center shadow-sm text-mv-taupe hover:text-mv-gold transition-all"><i data-lucide="external-link"></i></a>
+            </div>
+            
+            <div class="text-center md:text-right">
+                <p class="font-serif italic text-lg text-mv-taupe mb-1">г. Казань, Советский р-н, ул. Пионерская, 9А</p>
+                <p class="font-black text-mv-gold tracking-widest text-lg">+7 965 601-25-83</p>
+            </div>
+        </div>
+    </footer>
+
+    <!-- SCRIPTS -->
+    <script>
+        lucide.createIcons();
+
+        // Navbar Scroll Effect
+        window.addEventListener('scroll', () => {
+            const nav = document.getElementById('navbar');
+            if (window.scrollY > 50) {
+                nav.classList.add('glass', 'py-4', 'shadow-md');
+                nav.classList.remove('py-6');
+            } else {
+                nav.classList.remove('glass', 'py-4', 'shadow-md');
+                nav.classList.add('py-6');
+            }
+        });
+
+        // Mobile Menu Toggle
+        function toggleMenu(show) {
+            const menu = document.getElementById('mobile-menu');
+            if (show) {
+                menu.classList.remove('translate-y-full');
+                menu.classList.add('translate-y-0');
+            } else {
+                menu.classList.add('translate-y-full');
+                menu.classList.remove('translate-y-0');
+            }
+        }
+
+        // Booking Functionality
+        function submitBooking() {
+            const nameInput = document.getElementById('form-name').value.trim();
+            const phoneInput = document.getElementById('form-phone').value.trim();
+            const serviceInput = document.getElementById('form-service').value;
+
+            const name = nameInput || "[Имя]";
+            const phone = phoneInput || "[Телефон]";
+            const service = serviceInput;
+
+            const message = `Здравствуйте, меня зовут ${name}. Мой номер ${phone}. Хочу записаться на ${service}`;
+            const encodedMessage = encodeURIComponent(message);
+            
+            const telegramUrl = `https://t.me/viktoria_beauty_salon?text=${encodedMessage}`;
+            window.open(telegramUrl, '_blank');
+        }
+
+        // Smooth Scroll
+        document.querySelectorAll('a[href^="#"]').forEach(anchor => {
+            anchor.addEventListener('click', function (e) {
+                e.preventDefault();
+                const target = document.querySelector(this.getAttribute('href'));
+                if(target) {
+                    target.scrollIntoView({ behavior: 'smooth' });
+                }
+            });
+        });
+    </script>
+</body>
+</html>
