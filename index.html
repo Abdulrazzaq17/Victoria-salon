@@ -357,12 +357,20 @@ function playVideo() {
                         <option>Депиляция</option>
                     </select>
                 </div>
-                <div class="pt-6">
-                    <button onclick="submitBooking()" class="w-full bg-[#24A1DE] text-white py-5 rounded-2xl flex justify-center items-center gap-3 hover:bg-sky-600 transition-all uppercase text-[11px] tracking-widest font-black shadow-lg">
-                        <i data-lucide="send" class="w-4 h-4"></i>
-                        Записаться через Telegram
-                    </button>
-                    <p class="text-center text-[9px] opacity-40 mt-4 uppercase tracking-widest">Обработка данных по стандарту конфиденциальности</p>
+                <div class="pt-6 flex flex-col gap-4">
+    <!-- Telegram Button -->
+    <button onclick="submitBooking()" class="w-full bg-[#24A1DE] text-white py-5 rounded-2xl flex justify-center items-center gap-3 hover:bg-sky-600 transition-all uppercase text-[11px] tracking-widest font-black shadow-lg">
+        <i data-lucide="send" class="w-4 h-4"></i>
+        Записаться через Telegram
+    </button>
+    
+    <!-- Dikidi Button -->
+    <a href="https://dikidi.ru/176693" target="_blank" class="w-full bg-mv-gold text-white py-5 rounded-2xl flex justify-center items-center gap-3 hover:bg-mv-taupe transition-all uppercase text-[11px] tracking-widest font-black shadow-lg">
+        <i data-lucide="calendar-check" class="w-4 h-4"></i>
+        Записаться через Dikidi
+    </a>
+
+    <p class="text-center text-[9px] opacity-40 mt-2 uppercase tracking-widest">Обработка данных по стандарту конфиденциальности</p>
                 </div>
             </div>
         </div>
